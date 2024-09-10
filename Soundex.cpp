@@ -29,23 +29,27 @@ const SoundexCodeMap soundexMap;
 char getSoundexCode(char c) {
     return soundexMap.getCode(c);
 }
-string generateSoundex(const string& name) {
-    if (name.empty()) return "";
+std::string getFirstLetter(const std::string& name) {
+    return name.empty() ? "" : std::string(1, std::toupper(name[0]));
+}
 
-    string soundex(1, toupper(name[0]));
-    char prevCode = getSoundexCode(name[0]);
-
-    for (size_t i = 1; i < name.length() && soundex.length() < 4; ++i) {
+std::string getEncodedDigits(const std::string& name) {
+    std::string encoded;
+    char prevCode = '0';
+    for (size_t i = 1; i < name.length() && encoded.length() < 3; ++i) {
         char code = getSoundexCode(name[i]);
         if (code != '0' && code != prevCode) {
-            soundex += code;
+            encoded += code;
             prevCode = code;
         }
     }
+    return encoded;
+}
 
-    while (soundex.length() < 4) {
-        soundex += '0';
-    }
+std::string zeroPad(const std::string& s, size_t length) {
+    return s + std::string(std::max(int(length) - int(s.length()), 0), '0');
+}
 
-    return soundex;
+std::string generateSoundex(const std::string& name) {
+    return zeroPad(getFirstLetter(name) + getEncodedDigits(name), 4);
 }
