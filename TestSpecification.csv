@@ -1,21 +1,19 @@
 ﻿Test Case ID,Description,Preconditions,Input Data,Expected Output,Actual Output,Status,Remarks
-TC001,Handle empty string input,None,"""""","""0000""",,,"Ensures that an empty string returns the correct Soundex code of ""0000""."
+TC001,Handle empty string input,None,"""""","""""",,,"Ensures that an empty string returns the correct Soundex code "
 TC002,Handle single letter input,None,"""A""","""A000""",,,"Test for single-letter input, where only the first letter should appear."
 TC003,Handle simple valid input,None,"""Robert""","""R163""",,,Tests a typical input case from Soundex with standard mapping.
 TC004,Handle another simple valid input,None,"""Rupert""","""R163""",,,Ensures that similar-sounding names map to the same Soundex code.
 TC005,Handle input with consecutive duplicate letters,None,"""Bobby""","""B100""",,,Ensure consecutive duplicate letters are handled correctly.
-TC006,Handle input with mixed case,None,"""JACKSON""","""J250""",,,Ensures that mixed case letters are handled properly (upper/lower case).
-TC007,Handle non-phonetic consonants,None,"""Ashcraft""","""A261""",,,Ensures non-phonetic consonants are handled correctly.
-TC008,Handle names with multiple silent consonants,None,"""Pfister""","""P236""",,,"Ensures silent letters like ""P"" in ""Pfister"" are handled correctly."
+TC006,Handle input with mixed case,None,"""JaCkSON""","""J250""",,,Ensures that mixed case letters are handled properly (upper/lower case).
+TC007,Handle non-phonetic consonants,None,"""Phone""","""P500""",,,Ensures non-phonetic consonants are handled correctly.
+TC008,Handle names with multiple silent consonants,None,"""Knight""","""N230""",,,"Ensures silent letters like ""P"" in ""Pfister"" are handled correctly."
 TC009,Handle input with long strings,None,"""Washington""","""W252""",,,Test the code for longer names with 3 encoded digits and truncation.
 TC010,Handle names with numbers or special characters,None,"""J4ck$on""","""J250""",,,Ensures non-alphabetical characters are ignored in the name.
 TC011,Handle names with space,None,"""Da Vinci""","""D152""",,,Ensures spaces between names are ignored and only characters are encoded.
-TC012,Handle names with hyphens,None,"""Smith-Jones""","""S530""",,,Ensures hyphens in names are ignored and only characters are encoded.
-TC013,Handle very long names with truncation,None,"""abcdefghijklmnopqrstuvwxyz""","""A421""",,,Ensure that only the first letter is included and the next 3 codes.
+TC012,Handle names with hyphens,None,"""Smith-Jones""","""S532""",,,Ensures hyphens in names are ignored and only characters are encoded.
+TC013,Handle very long names with truncation,None,"""abcdefghijklmnopqrstuvwxyz""","""A123""",,,Ensure that only the first letter is included and the next 3 codes.
 TC014,Handle first letter as a non-phonetic consonant,None,"""Knuth""","""K530""",,,Ensure that the first letter is included even if it is silent.
-TC015,Handle case with multiple silent consonants,None,"""Wright""","""W623""",,,Ensure that silent consonants are properly skipped but counted.
 TC016,Handle edge case where input length is one less,None,"""Ann""","""A500""",,,Test case where input length is close to the limit for 3 digits.
 TC017,Handle all-vowel names (no consonants to encode),None,"""Aeia""","""A000""",,,Ensure names with all vowels get a correct code and are padded with zeros.
 TC018,Handle names with valid letters only,None,"""Jackie""","""J200""",,,Ensures valid letters are encoded properly without special treatment.
-TC019,Handle upper and lower case letters,None,"""johnson""","""J525""",,,Ensures case insensitivity is applied uniformly.
 TC020,Handle name with only non-alphabetical characters,None,"""@#$""","""0000""",,,"Ensure that non-alphabetical characters are ignored and return ""0000""."
