@@ -72,6 +72,9 @@ std::string zeroPad(const std::string& s, size_t length) {
 
 // Function to generate the full Soundex code for a name
 std::string generateSoundex(const std::string& name) {
+    if (name.empty()) {
+        return "0000";  // Handle empty string input by returning "0000"
+    }
     std::string firstLetter = getFirstLetter(name);
     std::string encodedDigits = getEncodedDigits(name);
     return zeroPad(firstLetter + encodedDigits, 4);
