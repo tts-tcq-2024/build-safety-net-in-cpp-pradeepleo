@@ -1,9 +1,11 @@
-#include "Soundex.h"
+#include <string>
 #include <cctype>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
+// SoundexCodeMap class to map characters to Soundex codes
 class SoundexCodeMap {
 private:
     unordered_map<char, char> codeMap;
@@ -25,44 +27,52 @@ public:
     }
 };
 
+// Instantiate the SoundexCodeMap
 const SoundexCodeMap soundexMap;
 
+// Function to get the Soundex code for a character
 char getSoundexCode(char c) {
     return soundexMap.getCode(c);
 }
+
+// Function to get the first letter in uppercase
 std::string getFirstLetter(const std::string& name) {
     return name.empty() ? "" : std::string(1, std::toupper(name[0]));
 }
-char encodeChar(char code, char prevCode) {
-    if (code == '0' || code == prevCode) {
-        return '\0';  // Return null char if same as previous or '0'
+
+// Helper function to process and add encoded characters
+void processAndAdd(char code, char& prevCode, std::string& encoded) {
+    if (code != '0' && code != prevCode) {
+        encoded += code;
+        prevCode = code;
     }
-    return code;
 }
 
+// Refactored function to get encoded digits with reduced complexity
 std::string getEncodedDigits(const std::string& name) {
     std::string encoded;
-    char prevCode = '0';  // Initialize previous code
+    char prevCode = '0';
 
-    size_t i = 1;
-    while (i < name.length() && encoded.length() < 3) {  // 1 decision point from loop
-        char code = getSoundexCode(name[i]);
-        char encodedChar = encodeChar(code, prevCode);
-        if (encodedChar != '\0') {  // 1 decision point
-            encoded += encodedChar;  // Append encoded character
+    for (size_t i = 1; i < name.length(); ++i) {
+        if (encoded.length() >= 3) {
+            break; // Exit early if we already have 3 encoded digits
         }
-        prevCode = code;  // Update previous code
-        ++i;
+        char code = getSoundexCode(name[i]);
+        processAndAdd(code, prevCode, encoded);
     }
 
     return encoded;
 }
 
-
+// Function to zero-pad a string to the required length
 std::string zeroPad(const std::string& s, size_t length) {
-    return s + std::string(std::max(int(length) - int(s.length()), 0), '0');
+    size_t zerosToAdd = length > s.length() ? length - s.length() : 0;
+    return s + std::string(zerosToAdd, '0');
 }
 
+// Function to generate the full Soundex code for a name
 std::string generateSoundex(const std::string& name) {
-    return zeroPad(getFirstLetter(name) + getEncodedDigits(name), 4);
+    std::string firstLetter = getFirstLetter(name);
+    std::string encodedDigits = getEncodedDigits(name);
+    return zeroPad(firstLetter + encodedDigits, 4);
 }
