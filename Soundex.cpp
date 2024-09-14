@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// SoundexCodeMap class to map characters to Soundex codes
 class SoundexCodeMap {
 private:
     unordered_map<char, char> codeMap;
@@ -35,12 +34,12 @@ char getSoundexCode(char c) {
     return soundexMap.getCode(c);
 }
 
-// Function to get the first letter in uppercase
+// Function to get the first letter in UPPERCASE
 std::string getFirstLetter(const std::string& name) {
     return name.empty() ? "" : std::string(1, std::toupper(name[0]));
 }
 
-// Helper function to process and add encoded characters
+// Helper function to process and add encoded character
 void processAndAdd(char code, char& prevCode, std::string& encoded) {
     if (code != '0' && code != prevCode) {
         encoded += code;
@@ -48,7 +47,7 @@ void processAndAdd(char code, char& prevCode, std::string& encoded) {
     }
 }
 
-// Refactored function to get encoded digits with reduced complexity
+// function to get encoded digits
 std::string getEncodedDigits(const std::string& name) {
     std::string encoded;
     char prevCode = '0';
@@ -64,7 +63,7 @@ std::string getEncodedDigits(const std::string& name) {
     return encoded;
 }
 
-// Function to zero-pad a string to the required length
+// Function to zero-pad a string to required length
 std::string zeroPad(const std::string& s, size_t length) {
     size_t zerosToAdd = length > s.length() ? length - s.length() : 0;
     return s + std::string(zerosToAdd, '0');
