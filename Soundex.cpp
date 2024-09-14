@@ -9,14 +9,15 @@ private:
     unordered_map<char, char> codeMap;
 
 public:
-    SoundexCodeMap() {
-        const char* codes[] = {"BFPV", "CGJKQSXZ", "DT", "L", "MN", "R"};
-        for (int i = 0; i < 6; ++i) {
-            for (const char* code = codes[i]; *code; ++code) {
-                codeMap[*code] = '1' + i;
-            }
-        }
-    }
+    SoundexCodeMap() : codeMap{
+        {'B', '1'}, {'F', '1'}, {'P', '1'}, {'V', '1'},
+        {'C', '2'}, {'G', '2'}, {'J', '2'}, {'K', '2'},
+        {'Q', '2'}, {'S', '2'}, {'X', '2'}, {'Z', '2'},
+        {'D', '3'}, {'T', '3'},
+        {'L', '4'},
+        {'M', '5'}, {'N', '5'},
+        {'R', '6'}
+    } {}
 
     char getCode(char c) const {
         auto it = codeMap.find(toupper(c));
@@ -32,16 +33,30 @@ char getSoundexCode(char c) {
 std::string getFirstLetter(const std::string& name) {
     return name.empty() ? "" : std::string(1, std::toupper(name[0]));
 }
+std::string encodeChar(char code, char prevCode) {
+    if (code == '0') {
+        return "";
+    }
+    if (code == prevCode) {
+        return "";
+    }
+    return std::string(1, code);
+}
 
 std::string getEncodedDigits(const std::string& name) {
     std::string encoded;
     char prevCode = '0';
-    for (size_t i = 1; i < name.length() && encoded.length() < 3; ++i) {
-        char code = getSoundexCode(name[i]);
-        if (code != '0' && code != prevCode) {
-            encoded += code;
-            prevCode = code;
+
+    for (size_t i = 1; i < name.length(); ++i) {
+        if (encoded.length() >= 3) {
+            break;
         }
+        char code = getSoundexCode(name[i]);
+        std::string encodedChar = encodeChar(code, prevCode);
+        if (!encodedChar.empty()) {
+            encoded += encodedChar;
+        }
+        prevCode = code;
     }
     return encoded;
 }
