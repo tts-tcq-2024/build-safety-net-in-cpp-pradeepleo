@@ -33,14 +33,11 @@ char getSoundexCode(char c) {
 std::string getFirstLetter(const std::string& name) {
     return name.empty() ? "" : std::string(1, std::toupper(name[0]));
 }
-std::string encodeChar(char code, char prevCode) {
-    if (code == '0') {
-        return "";
+char encodeChar(char code, char prevCode) {
+    if (code == '0' || code == prevCode) {
+        return '\0';  // Return null char if same as previous or '0'
     }
-    if (code == prevCode) {
-        return "";
-    }
-    return std::string(1, code);
+    return code;
 }
 
 std::string getEncodedDigits(const std::string& name) {
