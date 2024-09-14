@@ -6,7 +6,7 @@ TC004,Handle another simple valid input,None,"""Rupert""","""R163""",,,Ensures t
 TC005,Handle input with consecutive duplicate letters,None,"""Bobby""","""B100""",,,Ensure consecutive duplicate letters are handled correctly.
 TC006,Handle input with mixed case,None,"""JaCkSON""","""J250""",,,Ensures that mixed case letters are handled properly (upper/lower case).
 TC007,Handle non-phonetic consonants,None,"""Phone""","""P500""",,,Ensures non-phonetic consonants are handled correctly.
-TC008,Handle names with multiple silent consonants,None,"""Knight""","""N230""",,,"Ensures silent letters like ""K"" and """h""" in ""Knight"" are handled correctly."
+TC008,Handle names with multiple silent consonants,None,"""Knight""","""N230""",,,"Ensures silent letters like ""K"" and ""h"" in ""Knight"" are handled correctly."
 TC009,Handle input with long strings,None,"""Washington""","""W252""",,,Test the code for longer names with 3 encoded digits and truncation.
 TC010,Handle names with numbers or special characters,None,"""J4ck$on""","""J250""",,,Ensures non-alphabetical characters are ignored in the name.
 TC011,Handle names with space,None,"""Da Vinci""","""D152""",,,Ensures spaces between names are ignored and only characters are encoded.
