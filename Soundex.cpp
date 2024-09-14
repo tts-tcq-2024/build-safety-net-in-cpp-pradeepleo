@@ -45,21 +45,22 @@ std::string encodeChar(char code, char prevCode) {
 
 std::string getEncodedDigits(const std::string& name) {
     std::string encoded;
-    char prevCode = '0';
+    char prevCode = '0';  // Initialize previous code
 
-    for (size_t i = 1; i < name.length(); ++i) {
-        if (encoded.length() >= 3) {
-            break;
-        }
+    size_t i = 1;
+    while (i < name.length() && encoded.length() < 3) {  // 1 decision point from loop
         char code = getSoundexCode(name[i]);
-        std::string encodedChar = encodeChar(code, prevCode);
-        if (!encodedChar.empty()) {
-            encoded += encodedChar;
+        char encodedChar = encodeChar(code, prevCode);
+        if (encodedChar != '\0') {  // 1 decision point
+            encoded += encodedChar;  // Append encoded character
         }
-        prevCode = code;
+        prevCode = code;  // Update previous code
+        ++i;
     }
+
     return encoded;
 }
+
 
 std::string zeroPad(const std::string& s, size_t length) {
     return s + std::string(std::max(int(length) - int(s.length()), 0), '0');
