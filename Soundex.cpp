@@ -78,17 +78,18 @@ std::string FindFirstLetter(std::string name) {
 }
 
 // Function to generate the full Soundex code for a name
-std::string generateSoundex(std::string name) {
+std::string generateSoundex(const std::string name) {
     if (name.empty()) {
         return "";  // Handle empty string input by returning "0000"
     }
 
-    name = FindFirstLetter(name);
-    if(name.empty()){
+    std::string name_copy = name;
+    name_copy=FindFirstLetter(name_copy);
+    if(name_copy.empty()){
         return "";
     }
-    std::string firstLetter = getFirstLetter(name);
-    std::string encodedDigits = getEncodedDigits(name);
+    std::string firstLetter = getFirstLetter(name_copy);
+    std::string encodedDigits = getEncodedDigits(name_copy);
     return zeroPad(firstLetter + encodedDigits, 4);
 
 }
