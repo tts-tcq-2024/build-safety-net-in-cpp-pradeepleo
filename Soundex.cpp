@@ -70,7 +70,7 @@ std::string zeroPad(const std::string& s, size_t length) {
 }
 
 std::string FindFirstLetter(std::string name) {
-    while(isdigit(name[0])){
+    while( !isalpha(name[0] ){
         name = name.substr(1);
     }
     return name.empty()?"":name;
@@ -78,7 +78,7 @@ std::string FindFirstLetter(std::string name) {
 }
 
 // Function to generate the full Soundex code for a name
-std::string generateSoundex(const std::string name) {
+std::string generateSoundex(const std::string& name) {
     if (name.empty()) {
         return "";  // Handle empty string input by returning "0000"
     }
