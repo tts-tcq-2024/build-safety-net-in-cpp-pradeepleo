@@ -73,7 +73,7 @@ std::string FindFirstLetter(std::string name) {
     while( name.length() > 0 && !isalpha(name[0]) ){
         name = name.substr(1);
     }
-    return name.empty()? "" : name;
+    return name;
     
 }
 
