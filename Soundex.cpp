@@ -70,10 +70,10 @@ std::string zeroPad(const std::string& s, size_t length) {
 }
 
 std::string FindFirstLetter(std::string name) {
-    while( !isalpha(name[0] ){
+    while( !isalpha(name[0]) ){
         name = name.substr(1);
     }
-    return name.empty()?"":name;
+    return name.empty()? "" : name;
     
 }
 
