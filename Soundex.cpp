@@ -69,12 +69,26 @@ std::string zeroPad(const std::string& s, size_t length) {
     return s + std::string(zerosToAdd, '0');
 }
 
+std::string FindFirstLetter(std::string name) {
+    while(isdigit(name[0])){
+        name = name.substr(1);
+    }
+    return name.empty()?"":name;
+    
+}
+
 // Function to generate the full Soundex code for a name
-std::string generateSoundex(const std::string& name) {
+std::string generateSoundex(std::string name) {
     if (name.empty()) {
         return "";  // Handle empty string input by returning "0000"
+    }
+
+    name = FindFirstLetter(name);
+    if(name.empty()){
+        return "";
     }
     std::string firstLetter = getFirstLetter(name);
     std::string encodedDigits = getEncodedDigits(name);
     return zeroPad(firstLetter + encodedDigits, 4);
+
 }
