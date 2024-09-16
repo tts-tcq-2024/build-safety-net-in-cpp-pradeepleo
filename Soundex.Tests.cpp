@@ -39,7 +39,7 @@ TEST(SoundexTest, HandlesNamesWithSpaces) {
 
 // Test for names with hyphens
 TEST(SoundexTest, HandlesNamesWithHyphens) {
-    EXPECT_EQ(generateSoundex("Smith-Jones"), "S530");
+    EXPECT_EQ(generateSoundex("Smith-Jones"), "S532");
 }
 
 // Test for names with silent consonants
@@ -84,7 +84,7 @@ TEST(SoundexTest, HandlesConsonantCombinations) {
 
 // Test for very long names
 TEST(SoundexTest, HandlesLongNames) {
-    EXPECT_EQ(generateSoundex("abcdefghijklmnopqrstuvwxyz"), "A421");
+    EXPECT_EQ(generateSoundex("abcdefghijklmnopqrstuvwxyz"), "A123");
 }
 
 // Test for zero-padding for names shorter than 4 Soundex characters
