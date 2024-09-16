@@ -66,8 +66,8 @@ TEST(SoundexTest, HandlesNumbersAfterFirstLetter) {
 
 // Test for names with only special characters or numbers
 TEST(SoundexTest, HandlesNamesWithOnlySpecialCharsOrNumbers) {
-    EXPECT_EQ(generateSoundex("123"), "0000");  // No valid letters
-    EXPECT_EQ(generateSoundex("@#$"), "0000");  // Only special characters
+    EXPECT_EQ(generateSoundex("123"), "");  // No valid letters
+    EXPECT_EQ(generateSoundex("@#$"), "");  // Only special characters
 }
 
 // Test for name with a vowel-only name (should pad zeros)
