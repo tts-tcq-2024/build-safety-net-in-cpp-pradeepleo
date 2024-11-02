@@ -77,6 +77,7 @@ std::string FindFirstLetter(std::string name) {
     
 }
 
+//to return 0000 if string is empty or without alphabets
 bool ifEmptyorNoAlphabets(const std::string name){
     if (name.empty() || !std::any_of(name.begin(), name.end(), ::isalpha)) {
        return true;
