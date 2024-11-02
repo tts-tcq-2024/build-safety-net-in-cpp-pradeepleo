@@ -4,7 +4,7 @@
 
 // Test for an empty string input
 TEST(SoundexTest, HandlesEmptyString) {
-    EXPECT_EQ(generateSoundex(""), "");
+    EXPECT_EQ(generateSoundex(""), "0000");
 }
 
 // Test for a string with a single letter
