@@ -77,10 +77,17 @@ std::string FindFirstLetter(std::string name) {
     
 }
 
+bool ifEmptyorNoAlphabets(const std::string name){
+    if (name.empty() || !std::any_of(name.begin(), name.end(), ::isalpha)) {
+       return true;
+    }
+    return false;
+}
+
 // Function to generate the full Soundex code for a name
 std::string generateSoundex(const std::string& name) {
-    if (name.empty()) {
-        return "";  // Handle empty string input by returning "0000"
+    if (ifEmptyorNoAlphabets(name)) {
+        return "0000";  // Handle empty string or string with no alphabets input by returning "0000"
     }
 
     std::string name_copy = name;
